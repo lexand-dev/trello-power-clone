@@ -31,7 +31,7 @@ const MarketingPage = () => {
         <h1 className="text-3xl md:text-6xl text-center text-neutral-800 mb-6">
           Taskiflow help team more
         </h1>
-        <div className="text-3xl md:text-6xl bg-gradient-to-r from-sky-500 to-green-500 text-white rounded-md px-4 pb-4 pt-2 w-fit">
+        <div className="text-3xl md:text-6xl bg-gradient-to-r from-sky-500 to-green-500 text-white rounded-md px-4 pb-2 pt-3 w-fit">
           work forward
         </div>
       </div>
