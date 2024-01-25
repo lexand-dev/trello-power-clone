@@ -7,14 +7,28 @@ import { CreateBoard } from "./schema";
 import { InputType, ReturnType } from "./types";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
-  const { userId } = auth();
+  const { userId, orgId } = auth();
 
-  if (!userId) {
+  if (!userId || !orgId) {
     return {
       error: "You must be logged in to create a board.",
     };
   }
-  const { title } = data;
+  const { title, image } = data;
+
+  const [
+    imageId,
+    imageThumbUrl,
+    imageFullUrl,
+    imageLinkHTML,
+    imageUserName
+  ] = image.split("|")
+
+  if(!imageId || !imageThumbUrl || !imageFullUrl || !imageLinkHTML || !imageUserName) {
+    return {
+      error: "An unexpected error occurred. Please try again.",
+    };
+  }
 
   let board;
 
@@ -22,6 +36,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     board = await db.board.create({
       data: {
         title,
+        orgId,
+        imageId,
+        imageThumbUrl,
+        imageFullUrl,
+        imageLinkHTML,
+        imageUserName,
       },
     });
   } catch (error) {
