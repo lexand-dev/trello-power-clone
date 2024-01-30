@@ -7,6 +7,7 @@ import { Hint } from "@/components/hint";
 import { Skeleton } from "@/components/ui/skeleton";
 import { MAX_FREE_BOARDS } from "@/constants/boards";
 import { db } from "@/lib/db";
+import Link from "next/link";
 
 export const BoardList = async () => {
   const { orgId } = auth();
@@ -17,10 +18,10 @@ export const BoardList = async () => {
 
   const boards = await db.board.findMany({
     where: {
-      id: orgId,
+      orgId,
     },
     orderBy: {
-      title: "desc",
+      createdAt: "desc",
     },
   });
 
@@ -31,7 +32,18 @@ export const BoardList = async () => {
         Your boards
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-        {/* TODO: Add a link to the board page */}
+        {boards.map((board) => (
+          <Link
+            key={board.id}
+            href={`/board/${board.id}`}
+            className="group relative aspect-video bg-no-repeat bg-center bg-cover bg-sky-700 rounded-sm h-full w-full overflow-hidden"
+            style={{ backgroundImage: `url(${board.imageThumbUrl})` }}
+          >
+            <div className="absolute inset-0 p-2 bg-black/30 group-hover:bg-black/40 transition">
+              <p className="relative font-semibold text-white">{board.title}</p>
+            </div>
+          </Link>
+        ))}
         <FormPopover sideOffset={10} side="right">
           <div
             role="button"
