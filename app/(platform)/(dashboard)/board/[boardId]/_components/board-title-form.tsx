@@ -13,11 +13,11 @@ interface BoardTitleFormProps {
   data: Board;
 }
 
-const BoardTitleForm = ({ data }: BoardTitleFormProps) => {
+export const BoardTitleForm = ({ data }: BoardTitleFormProps) => {
   const { execute } = useAction(updateBoard, {
     onSuccess: (data) => {
       toast.success(`Board "${data.title}" updated!`);
-      +setTitle(data.title);
+      setTitle(data.title);
       disableEditing();
     },
     onError: (err) => {
@@ -43,8 +43,8 @@ const BoardTitleForm = ({ data }: BoardTitleFormProps) => {
     setIsEditing(false);
   };
 
-  const onSubmit = (formDat: FormData) => {
-    const title = formDat.get("title") as string;
+  const onSubmit = (formData: FormData) => {
+    const title = formData.get("title") as string;
     console.log("I am submitted ", title);
 
     execute({
@@ -87,5 +87,3 @@ const BoardTitleForm = ({ data }: BoardTitleFormProps) => {
     </Button>
   );
 };
-
-export default BoardTitleForm;
