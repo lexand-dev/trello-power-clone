@@ -154,6 +154,7 @@ export const ListContainer = ({ data, boardId }: ListContainerProps) => {
             {orderedData.map((list, index) => (
               <ListItem key={list.id} data={list} index={index} />
             ))}
+            {provided.placeholder}
             <ListForm />
             <div className="flex-shrink-0 w-1"></div>
           </ol>

@@ -20,7 +20,7 @@ export const ListItem = ({ data, index }: ListItemProps) => {
 
   const [isEditing, setIsEditing] = useState(false);
 
-  const desableEditing = () => {
+  const disableEditing = () => {
     setIsEditing(false);
   };
 
@@ -47,8 +47,8 @@ export const ListItem = ({ data, index }: ListItemProps) => {
             <Droppable droppableId={data.id} type="card">
               {(provided) => (
                 <ol
-                  {...provided.droppableProps}
                   ref={provided.innerRef}
+                  {...provided.droppableProps}
                   className={cn(
                     "mx-1 px-1 py-0.5 flex flex-col gap-y-2",
                     data.cards.length > 0 ? "mt-2" : "mt-0"
@@ -66,7 +66,7 @@ export const ListItem = ({ data, index }: ListItemProps) => {
               ref={textareaRef}
               isEditing={isEditing}
               enableEditing={enableEditing}
-              disableEditing={desableEditing}
+              disableEditing={disableEditing}
             />
           </div>
         </li>
